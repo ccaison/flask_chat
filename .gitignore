@@ -1,3 +1,7 @@
+# Project specific
+bad_words.txt
+temp_users.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
