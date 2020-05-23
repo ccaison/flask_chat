@@ -109,7 +109,7 @@ def verify_password(username, password):
     """
     if db.session.query(exists().where(User.email == username)).scalar():
         user = User.query.filter(User.email == username).first()
-        if user.email == "bot@trevorbot.io":
+        if user.email == "bot@turingbot.io":
             if fs_utils.verify_password(password, user.password):
                 return True
             else:
@@ -145,7 +145,7 @@ def message_received(user_name, msg, methods=["GET", "POST"]):
     socketio.emit(
         "response_msg",
         {
-            "user_name": "bot",
+            "user_name": "server",
             "message": '<span class="badge badge-secondary">@{0}</span> {1}'.format(
                 user_name, reply
             ),
@@ -166,7 +166,7 @@ def connection_event(json_msg):
     socketio.emit(
         "response_msg",
         {
-            "user_name": "localbot",
+            "user_name": "server",
             "message": 'Welcome <b><i>{0}</i></b> to the AI Chat Example. Use <span class="badge badge-light">@bot</span> to chat with the bot.'.format(
                 name
             ),
@@ -194,7 +194,7 @@ def handle_connect():
         return
     socketio.emit(
         "response_msg",
-        {"user_name": "localbot", "message": "{0} has connected.".format(name)},
+        {"user_name": "server", "message": "{0} has connected.".format(name)},
     )
 
 
@@ -205,7 +205,6 @@ def handle_my_custom_event(json_msg, methods=["GET", "POST"]):
     print("[-] Received message: ", json_msg)
     if json_msg["type"] == "connect":
         connection_event(json_msg)
-    print("received my event: {0}".format(json_msg))
     if json_msg["type"] == "msg":
         cleaned_msg = " ".join(
             "[censored]" if i in bad_words else i for i in json_msg["message"].split()
