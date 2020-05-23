@@ -1,5 +1,5 @@
 # flask imports
-from flask import Flask, render_template
+from flask import Flask, render_template, escape
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import exists
 from flask_security import (
@@ -210,6 +210,7 @@ def handle_my_custom_event(json_msg, methods=["GET", "POST"]):
             "[censored]" if i in bad_words else i for i in json_msg["message"].split()
         )
         if current_user.is_authenticated:
+            cleaned_msg = escape(cleaned_msg)
             socketio.emit(
                 "response_msg",
                 {"user_name": current_user.display_name, "message": cleaned_msg},
