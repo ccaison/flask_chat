@@ -181,7 +181,7 @@ def handle_disconnect():
         return
     socketio.emit(
         "response_msg",
-        {"user_name": "localbot", "message": "{0} has disconnected.".format(name)},
+        {"user_name": "server", "message": "{0} has disconnected.".format(name)},
     )
 
 

@@ -130,8 +130,8 @@
         $('#message').val('');
     }
 
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
-
+    //var socket = io.connect('https://' + document.domain + ':' + location.port);
+    var socket = io.connect('https://' + document.domain + ':' + location.port, {foreNew: true, secure: true});
     socket.on('connect', function () {
         socket.emit('response_msg', {
             type: 'connect',
