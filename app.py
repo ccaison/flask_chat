@@ -95,7 +95,6 @@ socketio = SocketIO(app)
 
 
 @app.route("/")
-@login_required
 def sessions():
     return render_template("session.html")
 
@@ -225,4 +224,4 @@ def handle_my_custom_event(json_msg, methods=["GET", "POST"]):
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, host="0.0.0.0")
+    socketio.run(app, debug=True, host="127.0.0.1", port=5000)

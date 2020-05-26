@@ -37,13 +37,35 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+        <span class="navbar-brand mb-0 h1">TuringBot</span>
+          <div class="navbar" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                {% if current_user.is_authenticated %}
+                <a class="nav-link" href="{{url_for('security.logout')}}">Logout</a>
+                {% else %}
+                <a class="nav-link" href="{{url_for('security.login')}}">Login</a>
+                {% endif %}
+              </li>
+            </ul>
+            
+          </div>
+          <div class="container"></div>
+      </nav>
     <div class="container-fluid">
+        <div class="row">
+            <div class="col">
 
+        </div>
+        </div>
         <div class="row mt-3">
             <!--<div class="col message_holder ml-3 mr-3 p-3" id="message_holder"></div>-->
             <!--<div class="message_holder" ></div>-->
             <div class="container message_holder light" id="message_holder"></div>
         </div>
+        {% if current_user.is_authenticated %}
         <div class="row mt-3">
             <div class="container">
                 <form action="" method="POST">
@@ -56,6 +78,13 @@
                 </form>
             </div>
         </div>
+        {% else %}
+        <div class="row mt-3">
+            <div class="container">
+                Please <a href="{{url_for('security.login')}}">login</a> to chat with the bot.
+            </div>
+        </div>
+        {% endif %}
         <!--end of form input-->
     </div>
 </body>
